@@ -32,6 +32,9 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Solo desarrollo: permite abrir `next dev` desde la red local (p. ej. http://192.168.18.129:3000).
+  // Sin esto, Next bloquea el JS de desarrollo y HMR para ese origen y la página no se hidrata.
+  allowedDevOrigins: ["192.168.18.*"],
   output: "standalone",
   serverExternalPackages: ["sharp"],
   poweredByHeader: false,
@@ -52,14 +55,6 @@ const nextConfig: NextConfig = {
         headers: securityHeaders,
       },
     ];
-  },
-  turbopack: {
-    rules: {
-      "*.css": {
-        loaders: ["@tailwindcss/turbopack"],
-        as: "*.css",
-      },
-    },
   },
 };
 

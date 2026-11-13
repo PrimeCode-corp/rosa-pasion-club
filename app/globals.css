@@ -1,26 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F26666;
+  --foreground: #ffffff;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-cinzel: 'Cinzel', serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-display: var(--font-display-src), Georgia, serif;
+  --font-inter: var(--font-inter-src), system-ui, sans-serif;
+  
+  --color-brand-black: #F26666;
+  --color-brand-dark: #C21820;
+  --color-brand-red: #E02424;
+  --color-brand-carmine: #F26666;
+  --color-brand-pink: #FFA0A0;
+
+  --color-wine-950: #F26666;
+  --color-wine-900: #8C141E;
+  --color-wine-800: #A81822;
+  --color-wine-700: #C21820;
+  --color-wine-600: #E02424;
+  --color-wine-500: #F26666;
+  --color-wine-400: #FFA0A0;
+
+  --color-gold-100: #FCF8E8;
+  --color-gold-200: #F7EDC4;
+  --color-gold-300: #EEDC94;
+  --color-gold-400: #E1C463;
+  --color-gold-500: #D4AF37;
+  --color-gold-600: #B59124;
+  --color-gold-700: #8C6F16;
+
+  /* Identidad Rosa Pasión (header, hero y tarjeta) */
+  --color-rp-red: #C8141E;
+  --color-rp-red-dark: #A30F17;
+  --color-rp-logo: #E00000; /* rojo del logo: hover de los botones */
+  --color-rp-wine: #7C1314;
+  --color-rp-ink: #1A1416;
+  --color-rp-cream: #FCDAE5; /* fondo principal (antes marfil) */
+  --color-rp-blush: #F7C9D8; /* franja de beneficios y hovers: un tono más profundo que el fondo */
+  --color-rp-line: #DDB4AE;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevenir zoom no deseado en iOS Safari cuando el usuario toca un campo de texto */
+@media screen and (max-width: 768px) {
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Custom Gold gradients & glowing borders */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #FFF3C4 0%, #D4AF37 50%, #AA820A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-bg {
+  background: linear-gradient(135deg, #E6C875 0%, #D4AF37 50%, #A8811A 100%);
+}
+
+.gold-gradient-border {
+  border: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+.card-luxury-shadow {
+  box-shadow: 0 15px 35px -5px rgba(35, 4, 8, 0.5), 0 0 20px 2px rgba(212, 175, 55, 0.15);
+}
+
+/* Luminous Coral Rose #F26666 background */
+.bg-rose-pattern {
+  background-color: #F26666;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.25) 0%, transparent 60%),
+    radial-gradient(circle at 15% 35%, rgba(255, 255, 255, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 85% 65%, rgba(185, 35, 45, 0.18) 0%, transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(255, 255, 255, 0.15) 0%, transparent 60%),
+    linear-gradient(180deg, #F26666 0%, #E85858 50%, #F26666 100%);
+  background-attachment: fixed;
+}
+
+/* Hide scrollbar for category pills on mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Logo Container styling for optimal visibility */
+.partner-logo-box {
+  background: linear-gradient(145deg, #FFFFFF, #F8F9FA);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(212, 175, 55, 0.4);
+}
+
+/* Phone frame simulation */
+.device-simulator-frame {
+  max-width: 440px;
+  margin: 20px auto;
+  border: 10px solid #1c1c1e;
+  border-radius: 46px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 0 2px #444;
+  overflow: hidden;
+  min-height: 860px;
+}
+
+/* Continuous slow smooth scroll for category pills */
+@keyframes categoryScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.animate-category-scroll {
+  display: flex;
+  width: max-content;
+  animation: categoryScroll 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-category-scroll:hover,
+.animate-category-scroll:active {
+  animation-play-state: paused;
+}
+
+.mask-category-edges {
+  mask-image: linear-gradient(to right, transparent 0px, black 16px, black calc(100% - 24px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0px, black 16px, black calc(100% - 24px), transparent 100%);
+}
+
+/* Hero: animación letra a letra del título (Rosa ↔ Pasión), en horizontal de izquierda a derecha: la palabra nueva entra desde la izquierda y la saliente se va hacia la derecha. Ver components/portal/hero-showcase.tsx */
+.hero-letter {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+.hero-letter-in {
+  animation: hero-letter-in-kf 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-letter-out {
+  animation: hero-letter-out-kf 550ms cubic-bezier(0.55, 0, 0.7, 0.4) both;
+}
+
+.hero-letter-hidden {
+  opacity: 0;
+}
+
+@keyframes hero-letter-in-kf {
+  from {
+    opacity: 0;
+    transform: translateX(-0.45em) scale(0.96);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-letter-out-kf {
+  from {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(0.4em) scale(1.02);
+    filter: blur(10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter-in {
+    animation: none;
+    opacity: 1;
+  }
+  .hero-letter-out {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Tarjeta de socio: línea de luz que recorre el borde de vez en cuando.
+   Un degradado cónico con un solo destello gira alrededor de la tarjeta; la máscara deja ver
+   solo el anillo del borde. Recorre el contorno en ~2 s y descansa el resto del ciclo. */
+@property --card-shine-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.card-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--card-shine-angle),
+    transparent 0deg,
+    transparent 300deg,
+    rgba(200, 20, 30, 0.45) 330deg,
+    #c8141e 352deg,
+    transparent 360deg
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  opacity: 0;
+  animation: card-shine-sweep 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes card-shine-sweep {
+  0% {
+    --card-shine-angle: 0deg;
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  26% {
+    opacity: 1;
+  }
+  30% {
+    --card-shine-angle: 360deg;
+    opacity: 0;
+  }
+  100% {
+    --card-shine-angle: 360deg;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-shine {
+    animation: none;
+  }
+}
+
+/* Hero: aparición al cargar.
+   Lianas: se "dibujan" recortándose de izquierda a derecha. La liana inferior está girada 180°,
+   así que el mismo recorte se ve de derecha a izquierda.
+   Pétalos: entran desde su lado (izquierda o derecha) con un retraso escalonado. */
+.hero-vine-reveal {
+  animation: hero-vine-reveal 1.1s cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+
+@keyframes hero-vine-reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.9;
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.9;
+  }
+}
+
+.hero-petal-from-left,
+.hero-petal-from-right {
+  animation-duration: 600ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+.hero-petal-from-left {
+  animation-name: hero-petal-from-left;
+}
+.hero-petal-from-right {
+  animation-name: hero-petal-from-right;
+}
+
+/* translate (no transform) para no pisar el giro propio de cada pétalo */
+@keyframes hero-petal-from-left {
+  from {
+    opacity: 0;
+    translate: -40px -6px;
+  }
+  to {
+    opacity: 0.9;
+    translate: 0 0;
+  }
+}
+@keyframes hero-petal-from-right {
+  from {
+    opacity: 0;
+    translate: 40px -6px;
+  }
+  to {
+    opacity: 0.9;
+    translate: 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-vine-reveal,
+  .hero-petal-from-left,
+  .hero-petal-from-right {
+    animation: none;
+  }
 }
